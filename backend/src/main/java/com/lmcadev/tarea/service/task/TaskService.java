@@ -51,6 +51,13 @@ public class TaskService {
     }
 
 
+    /**
+     * Obtiene una tarea por su ID.
+     *
+     * @param id ID de la tarea a obtener.
+     * @return TaskDTOResponse con los detalles de la tarea encontrada.
+     * @throws IllegalArgumentException si no se encuentra una tarea con el ID proporcionado.
+     */
     public TaskDTOResponse getTaskById(Long id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Tarea no encontrada con ID: " + id));
@@ -62,6 +69,13 @@ public class TaskService {
         return response;
     }
 
+    /**
+     * Elimina una tarea por su ID.
+     *
+     * @param id ID de la tarea a eliminar.
+     * @return TaskDTOResponse con los detalles de la tarea eliminada.
+     * @throws IllegalArgumentException si no se encuentra la tarea con el ID proporcionado.
+     */
     public TaskDTOResponse deleteTaskById(Long id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Tarea no encontrada con ID: " + id));
@@ -74,6 +88,14 @@ public class TaskService {
         return response;
     }
 
+    /**
+     * Actualiza una tarea existente por su ID.
+     *
+     * @param id      ID de la tarea a actualizar.
+     * @param request Objeto TaskDTORequest con los nuevos datos para la tarea.
+     * @return TaskDTOResponse con los detalles de la tarea actualizada.
+     * @throws IllegalArgumentException si no se encuentra la tarea con el ID proporcionado.
+     */
     public TaskDTOResponse updateTaskById(Long id, TaskDTORequest request) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Tarea no encontrada con ID: " + id));
@@ -87,4 +109,29 @@ public class TaskService {
 
         return response;
     }
+
+
+    /**
+     * Asigna una tarea a un usuario existente por sus IDs.
+     *
+     * @param taskId ID de la tarea a asignar.
+     * @param userId ID del usuario al que se asignará la tarea.
+     * @return TaskDTOResponse con los detalles de la tarea asignada.
+     * @throws IllegalArgumentException si no se encuentra la tarea o el usuario con los IDs proporcionados.
+     */
+    public TaskDTOResponse assignTaskToUser(Long taskId, Long userId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new IllegalArgumentException("Tarea no encontrada con ID: " + taskId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + userId));
+        task.setUser(user);
+        Task savedTask = taskRepository.save(task);
+        TaskDTOResponse response = new TaskDTOResponse();
+        response.setId(savedTask.getId());
+        response.setTitle(savedTask.getTitle());
+        response.setDescription(savedTask.getDescription());
+        response.setUserId(user.getId());
+        return response;
+    }
+
 }

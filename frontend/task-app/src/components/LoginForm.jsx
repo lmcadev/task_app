@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api/axiosConfig.jsx';
-import { saveToken } from '../../../../../client_frontend/client/src/utils/auth.jsx';
+import { saveToken } from '../utils/auth.jsx';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -12,7 +12,7 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await api.post('/auth/login',
+            const response = await api.post('/api/V1/auth/login',
                 {
                     username: email, // o "email" si tu backend espera "email"
                     password: password

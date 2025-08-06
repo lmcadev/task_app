@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { removeToken } from '../../../../../client_frontend/client/src/utils/auth.jsx';
+import { removeToken } from '../utils/auth.jsx';
 
 const Dashboard = () => {
     const navigate = useNavigate();

@@ -3,7 +3,6 @@ package com.lmcadev.tarea.controller.user;
 import com.lmcadev.tarea.DTO.user.UserDTORequest;
 import com.lmcadev.tarea.DTO.user.UserDTOResponse;
 import com.lmcadev.tarea.service.user.UserService;
-import jakarta.persistence.PostUpdate;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

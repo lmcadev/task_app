@@ -45,8 +45,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Task> tasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
 
 
 }

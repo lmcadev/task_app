@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axiosConfig';
-import { getToken } from '../../../../../client_frontend/client/src/utils/auth.jsx';
+import { getToken } from '../utils/auth.jsx';
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
